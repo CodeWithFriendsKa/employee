@@ -20,7 +20,7 @@ public class EmployeeController {
     private final EmployeeService employeeService;
     private final EmployeeResourceAssembler employeeResourceAssembler;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/employee/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/employee/{id}", produces = "application/json")
     public Resource<Employee> getEmployeeById(@PathVariable(name = "id") Long id){
         var employee = employeeService.findEmployeeById(id);
         var resource = employeeResourceAssembler.toResource(employee);
@@ -28,7 +28,7 @@ public class EmployeeController {
         return resource;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/employee")
+    @RequestMapping(method = RequestMethod.GET, value = "/employee",  produces = "application/json")
     public Resources<Resource<Employee>> getAllEmployee(){
         var employees = employeeService
                 .findAllEmployee()
@@ -43,7 +43,7 @@ public class EmployeeController {
         return resources;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/employee")
+    @RequestMapping(method = RequestMethod.POST, value = "/employee",  produces = "application/json")
     public Resource<Employee> postEmployee(@RequestBody Employee employee){
         var e = employeeService.createEmployee(employee);
         var resource = employeeResourceAssembler.toResource(e);
@@ -51,7 +51,7 @@ public class EmployeeController {
         return resource;
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/employee")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/employee", produces = "application/json")
     public void deleteEmployee(@RequestBody Employee employee){
         employeeService.deleteEmployee(employee);
     }
